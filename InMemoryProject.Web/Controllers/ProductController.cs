@@ -25,7 +25,8 @@ namespace InMemoryProject.Web.Controllers
             MemoryCacheEntryOptions options = new MemoryCacheEntryOptions
             {
                 AbsoluteExpiration = DateTime.Now.AddMinutes(1),
-                SlidingExpiration = TimeSpan.FromSeconds(10)
+                SlidingExpiration = TimeSpan.FromSeconds(10),
+                Priority = CacheItemPriority.High
             };
 
             _memoryCache.Set<string>("time", DateTime.Now.ToString(), options);
