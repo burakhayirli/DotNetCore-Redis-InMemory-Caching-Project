@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InMemoryProject.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
@@ -37,8 +38,13 @@ namespace InMemoryProject.Web.Controllers
                 _memoryCache.Set("callback", $"{key}->{value} => Reason: {reason} State: {state}");
             });
 
-
             _memoryCache.Set<string>("time", DateTime.Now.ToString(), options);
+
+            //Complex Types
+            Product product = new Product{Id=1,Name="Book",Price=50};
+            _memoryCache.Set<Product>("product:1", product);
+
+            _memoryCache.Set<double>("money", 152.99);
 
             return View();
         }
@@ -54,6 +60,7 @@ namespace InMemoryProject.Web.Controllers
             _memoryCache.TryGetValue("callback", out string callback);
             ViewBag.time = timeCache;
             ViewBag.callback = callback;
+            ViewBag.product = _memoryCache.Get<Product>("product:1");
             //ViewBag.time = _memoryCache.Get<string>("time");
 
             return View();

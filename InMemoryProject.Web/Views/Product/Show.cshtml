@@ -1,11 +1,14 @@
 ﻿
 @{
     ViewData["Title"] = "Show";
+
+    Product product = ViewBag.product as Product;
 }
 
 <h1>Show</h1>
 <h1>Time: @ViewBag.time</h1>
 <h2>Remove Reason: @ViewBag.callback</h2>
+<h2>Product: @product.Id => @product.Name => @product.Price</h2>
 
 
 
