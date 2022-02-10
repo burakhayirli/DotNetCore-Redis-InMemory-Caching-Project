@@ -17,13 +17,33 @@ namespace InMemoryProject.Web.Controllers
 
         public IActionResult Index()
         {
-            _memoryCache.Set<string>("time",DateTime.Now.ToString());
+            //if (String.IsNullOrEmpty(_memoryCache.Get<string>("time")))
+            //{
+            //    _memoryCache.Set<string>("time", DateTime.Now.ToString());
+            //}
+
+            MemoryCacheEntryOptions options = new MemoryCacheEntryOptions
+            {
+                AbsoluteExpiration = DateTime.Now.AddMinutes(1),
+                SlidingExpiration = TimeSpan.FromSeconds(10)
+            };
+
+            _memoryCache.Set<string>("time", DateTime.Now.ToString(), options);
+
             return View();
         }
 
         public IActionResult Show()
         {
-            ViewBag.time= _memoryCache.Get<string>("time");
+            //_memoryCache.GetOrCreate<string>("time", entry =>
+            //{
+            //    return DateTime.Now.ToString();
+            //});
+
+            _memoryCache.TryGetValue("time", out string timeCache);
+            ViewBag.time = timeCache;
+            //ViewBag.time = _memoryCache.Get<string>("time");
+
             return View();
         }
     }

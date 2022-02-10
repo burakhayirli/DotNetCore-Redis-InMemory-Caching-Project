@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMemoryProject.Web", "InMemoryProject.Web\InMemoryProject.Web.csproj", "{AD90D42E-8D62-4781-A428-1CFDF4CA8894}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B8DEEBB5-D945-4218-B38F-4FE0A3054A21}"
+	ProjectSection(SolutionItems) = preProject
+		Terms.txt = Terms.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
