@@ -1,2 +1,4 @@
 AbsoluteExpiration
 SlidingExpiration
+Priority
+RegisterPostEvictionCallback

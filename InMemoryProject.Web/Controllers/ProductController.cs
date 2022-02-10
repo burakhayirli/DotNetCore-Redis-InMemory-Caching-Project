@@ -24,10 +24,19 @@ namespace InMemoryProject.Web.Controllers
 
             MemoryCacheEntryOptions options = new MemoryCacheEntryOptions
             {
-                AbsoluteExpiration = DateTime.Now.AddMinutes(1),
-                SlidingExpiration = TimeSpan.FromSeconds(10),
+                AbsoluteExpiration = DateTime.Now.AddSeconds(10),
+                
+                //AbsoluteExpiration = DateTime.Now.AddMinutes(1),
+                //SlidingExpiration = TimeSpan.FromSeconds(10),
+                
                 Priority = CacheItemPriority.High
             };
+
+            options.RegisterPostEvictionCallback((key, value, reason, state) =>
+            {
+                _memoryCache.Set("callback", $"{key}->{value} => Reason: {reason} State: {state}");
+            });
+
 
             _memoryCache.Set<string>("time", DateTime.Now.ToString(), options);
 
@@ -42,7 +51,9 @@ namespace InMemoryProject.Web.Controllers
             //});
 
             _memoryCache.TryGetValue("time", out string timeCache);
+            _memoryCache.TryGetValue("callback", out string callback);
             ViewBag.time = timeCache;
+            ViewBag.callback = callback;
             //ViewBag.time = _memoryCache.Get<string>("time");
 
             return View();
