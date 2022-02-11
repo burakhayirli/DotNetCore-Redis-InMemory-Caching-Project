@@ -90,7 +90,7 @@ HGETALL dictionary
 1) "pen"
 2) "kalem"
 
-ASP.NET CORE + IDistributedCache
-Package: Microsoft.Extensions.Caching. StackExchangeRedis
-	AddStackExchangeRedisCache
-	IDistributedCache
+ASP.NET CORE + IDistributedCache (For simple proceses like only sets gets)
+Package: Microsoft.Extensions.Caching.StackExchangeRedis
+	AddStackExchangeRedisCache (add to services)
+	IDistributedCache (DI implementation)
