@@ -1,4 +1,96 @@
+InMemoryCache
+
 AbsoluteExpiration
 SlidingExpiration
 Priority
 RegisterPostEvictionCallback
+
+Redis (Remote Dictionary Server)
+Data Types:
+
+Redis String (Binary Save) Max 512MB
+Redis List
+Redis Set
+Redis SortedSet
+Redis Hash
+
+Windows: By Chocolately
+Docker: docker run --name redis-cache -p 6379:6379 -d redis
+		docker exec -it redis-cache sh
+		redis-cli -h localhost -p 6379
+		ping
+
+Redis Desktop Manager -> https://resp.app/
+
+Redis String Commands
+SET name burak
+GET name
+GETRANGE name 0 2  =>"bur"
+APPEND name hayirli => burakhayirli
+
+SET vizitor 1000
+INCR vizitor =>(integer) 1001
+INCRBY vizitor 10 => (integer) 1011
+DECR vizitor => (integer) 1013
+DECRBY vizitor 10 => (integer) 1003
+
+Redis List Commands
+LPUSH books book1 => (ADD TO TOP OF LIST)
+RPUSH books book3 => (ADD TO END OF LIST)
+LRANGE books 0 2 (GET BETWEEN INDEXES)
+LRANGE books 0 -1 => GET ALL
+
+LPOP books => DELETE FIRST ELEMENT
+RPOP books => DELETE LAST ELEMENT
+LINDEX books 2 => GET SPECIFIED INDEX ELEMENT VALUE
+
+Redis Set Commands
+Same as List type but there are two diffirences in Set
+1- Values mush be unique
+2- There is no LPUSH or RPUSH, Its randomly.
+
+SADD color blue
+SADD color red
+SMEMBERS color => GET ALL LIST
+1) "red"
+2) "green"
+3) "blue"
+SREM color green => REMOVE green value into color
+
+redis-cli --raw => run with encoding. For Turkish.
+
+Redis SortedSet Command
+Values must be unique but scores are not unique
+ZADD books 1 book1  => 1 is score. order by.
+ZADD books 5 book5
+ZADD books 10 book10
+ZRANGE books 0 -1
+1) "book1"
+2) "book5"
+3) "book10"
+
+ZRANGE books 0 -1 WITHSCORES
+1) "book1"
+2) "1"
+3) "book5"
+4) "5"
+5) "book10"
+6) "10"
+ZREM books book5 => Remove member
+
+Redis Hash Commands
+Like Dictionary in C#
+
+HMSET dictionary pen kalem
+HMSET dictionary book kitap
+
+HGET dictionary book => "kitap"
+HDEL dictionary book => Remove book
+HGETALL dictionary
+1) "pen"
+2) "kalem"
+
+ASP.NET CORE + IDistributedCache
+Package: Microsoft.Extensions.Caching. StackExchangeRedis
+	AddStackExchangeRedisCache
+	IDistributedCache
