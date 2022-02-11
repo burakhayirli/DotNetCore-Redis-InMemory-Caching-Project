@@ -15,7 +15,7 @@ namespace RedisIDistributedCacheProject.Web.Controllers
             _distributedCache = distributedCache;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             DistributedCacheEntryOptions options = new DistributedCacheEntryOptions()
             {
@@ -23,6 +23,23 @@ namespace RedisIDistributedCacheProject.Web.Controllers
             };
 
             _distributedCache.SetString("name", "Burak",options);
+            await _distributedCache.SetStringAsync("surname", "Hayırlı",options);
+            return View();
+        }
+
+        public async Task<IActionResult> Show()
+        {
+            string name = _distributedCache.GetString("name");
+            string surname = await _distributedCache.GetStringAsync("surname");
+            ViewBag.name = name;
+            ViewBag.surname = surname;
+            return View();
+        }
+
+        public async Task<IActionResult> Remove()
+        {
+            _distributedCache.Remove("name");
+            await _distributedCache.RemoveAsync("name");
             return View();
         }
     }
