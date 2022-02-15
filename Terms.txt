@@ -94,3 +94,5 @@ ASP.NET CORE + IDistributedCache (For simple proceses like only sets gets)
 Package: Microsoft.Extensions.Caching.StackExchangeRedis
 	AddStackExchangeRedisCache (add to services)
 	IDistributedCache (DI implementation)
+
+StachExchange.Redis API
